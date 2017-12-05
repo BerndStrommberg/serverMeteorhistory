@@ -11,16 +11,16 @@ const connection = mysql.createConnection({
 });
 
 const app = express();
-const radius = 0;
+const radius = 4.52;
 function getQueryInRadius(lat, lon) {
-    let radiusQuery = `SELECT * FROM meteorexample WHERE (lat BETWEEN ${lat-radius} AND ${lat+radius}) AND (lon BETWEEN ${lon-radius} AND ${lon+radius})`;
+    console.log("Lat: " + lat +": " + typeof lat);
+    let radiusQuery = 'SELECT * FROM meteorexample WHERE (lat BETWEEN ' + (lat-radius) + ' AND ' + (lat+radius) +') AND (lon BETWEEN ' + (lon-radius) + ' AND '+ (lon+radius) + ')';
     return radiusQuery;
 }
 
 const tasks = {
     newMeteorites: {
         name: "newMeteorites",
-        accordingQuery: "SELECT * FROM meteorexample"
     }
 }
 
@@ -33,14 +33,13 @@ connection.connect((err) => {
 app.get("/", (request, response) => {
     let urlSended = url.parse(request.url, true);
     let query = urlSended.query;
+    console.log(query);
     response.setHeader('Content-Type', 'application/json');
 
     if (query.task === tasks.newMeteorites.name) {
         console.log("SERVER: Message - excecuting task: \"", query.task, "\"" );
 
-        connection.query(getQueryInRadius(-14.258, -49.15917), (err, rows, fields) => {
-            // connection.end();
-            console.log("SERVER: Message - query ", tasks.newMeteorites.accordingQuery);
+        connection.query(getQueryInRadius(parseFloat(query.lat), parseFloat(query.lon)), (err, rows, fields) => {
             if(err) {
                 console.log("Error: ", err);
             } else {
