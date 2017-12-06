@@ -14,7 +14,7 @@ const app = express();
 const radius = 4.52;
 function getQueryInRadius(lat, lon) {
     console.log("Lat: " + lat +": " + typeof lat);
-    let radiusQuery = 'SELECT * FROM meteorexample WHERE (lat BETWEEN ' + (lat-radius) + ' AND ' + (lat+radius) +') AND (lon BETWEEN ' + (lon-radius) + ' AND '+ (lon+radius) + ')';
+    let radiusQuery = 'SELECT * FROM test WHERE (lat BETWEEN ' + (lat-radius) + ' AND ' + (lat+radius) +') AND (lon BETWEEN ' + (lon-radius) + ' AND '+ (lon+radius) + ')';
     return radiusQuery;
 }
 
