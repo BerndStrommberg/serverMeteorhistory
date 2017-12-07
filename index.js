@@ -67,7 +67,6 @@ app.get("/", (request, response) => {
                 console.log("Error: ", err);
             } else {
                 response.send(JSON.stringify(rows));
-                response.send("Tschau ihr bitches");
             }
         });
     }
