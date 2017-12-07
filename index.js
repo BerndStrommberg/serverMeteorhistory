@@ -60,7 +60,43 @@ function getContent(lat, lon) {
         ")";
 
     let test =
-        "select * from Country, events, Meteor where events.eventLat BETWEEN (-1.002 - 0.8) and (-1.002 + 0.8) and events.eventLon BETWEEN (37.15 - 0.8) and (37.15 + 0.8) and Country.lat BETWEEN (-1.002 - 0.8) and (-1.002 + 0.8) and Country.lon BETWEEN (37.15 - 0.8) and (37.15 + 0.8) and Meteor.lat BETWEEN (-1.002 - 0.8) and (-1.002 + 0.8) and Meteor.lon BETWEEN (37.15 - 0.8) and (37.15 + 0.8)";
+        "select * from Country, events, Meteor where events.eventLat BETWEEN (" +
+        lat -
+        lon +
+        ") and ( " -
+        1.002 +
+        0.8 +
+        ") and events.eventLon BETWEEN (" +
+        37.15 -
+        0.8 +
+        ") and (" +
+        37.15 +
+        0.8 +
+        ") and Country.lat BETWEEN (" +
+        -1.002 -
+        0.8 +
+        ") and (" +
+        -1.002 +
+        0.8 +
+        ") and Country.lon BETWEEN (" +
+        37.15 -
+        0.8 +
+        ") and (" +
+        37.15 +
+        0.8 +
+        ") and Meteor.lat BETWEEN (" +
+        -1.002 -
+        0.8 +
+        ") and (" +
+        -1.002 +
+        0.8 +
+        ") and Meteor.lon BETWEEN (" +
+        37.15 -
+        0.8 +
+        ") and (" +
+        37.15 +
+        0.8 +
+        ")";
     return test;
 }
 
