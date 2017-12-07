@@ -20,21 +20,42 @@ function getQueryInRadius(lat, lon) {
         lat +
         " AND events.eventLon = Country.lon = " +
         lon +
-        ";"
+        ";";
     return radiusQuery;
 }
 
-function getQueryEventFromYear(lat, lon) {
+function getContent(lat, lon) {
     console.log("from lat: " + lat, "lon: ", lon);
-
     let eventQuery =
-        "SELECT * FROM test WHERE (lat BETWEEN " +
+        "select * from Country, events, Meteor" +
+        "where events.eventLat BETWEEN (" +
         (lat - radius) +
-        " AND " +
+        " and " +
         (lat + radius) +
-        ") AND (lon BETWEEN " +
+        ")" +
+        "and     events.eventLon BETWEEN (" +
         (lon - radius) +
-        " AND " +
+        " and " +
+        (lon + radius) +
+        ")" +
+        "and     Country.lat BETWEEN (" +
+        (lat - radius) +
+        " and " +
+        (lat + radius) +
+        ")" +
+        "and     Country.lon BETWEEN (" +
+        (lon - radius) +
+        " and " +
+        (lon + radius) +
+        ")" +
+        "and     Meteor.lat BETWEEN (" +
+        (lat - radius) +
+        " and " +
+        (lat + radius) +
+        ")" +
+        "and     Meteor.lon BETWEEN (" +
+        (lon - radius) +
+        " and " +
         (lon + radius) +
         ")";
     return eventQuery;
@@ -62,31 +83,16 @@ app.get("/", (request, response) => {
     console.log(query.task + " Type: " + typeof query.task);
     response.setHeader("Content-Type", "application/json");
     if (query.task === tasks.getEvents.name) {
-        connection.query(getQueryInRadius(query.lat, query.lon), (err, rows, fields) => {
-            if (err) {
-                console.log("Error: ", err);
-            } else {
-                response.send(JSON.stringify(rows));
+        connection.query(
+            getContent(parseFloat(query.lat), parseFloat(query.lon)),
+            (err, rows, fields) => {
+                if (err) {
+                    console.log("Error: ", err);
+                } else {
+                    response.send(JSON.stringify(rows));
+                }
             }
-        });
+        );
     }
-
-    //for get meteorit
-    // if (query.task === tasks.newMeteorites.name) {
-    //     console.log('SERVER: Message - excecuting task: "', query.task, '"');
-
-    //     connection.query(
-    //         getQueryInRadius(parseFloat(query.lat), parseFloat(query.lon)),
-    //         (err, rows, fields) => {
-    //             if (err) {
-    //                 console.log("Error: ", err);
-    //             } else {
-    //                 console.log("SERVER: Message - query solution: ", rows);
-
-    //                 response.send(JSON.stringify(rows));
-    //             }
-    //         }
-    //     );
-    // }
 });
 app.listen(3000);
