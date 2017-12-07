@@ -54,7 +54,7 @@ app.get("/", (request, response) => {
             if (err) {
                 console.log("Error: ", err);
             } else {
-                response.sendJSON.stringify(rows);
+                response.sendJSON.stringify(JSON.stringify(rows));
                 response.send("Tschau ihr bitches");
             }
         }
