@@ -79,3 +79,19 @@ app.get("/", (request, response) => {
     // }
 });
 app.listen(3000);
+
+
+
+
+SELECT
+    *
+FROM
+    Events,
+    Meteor,
+    Country
+WHERE
+    (Events.lat = Meteor.lat = Country.lat = 42.000000)
+    AND
+    (Events.lon = Meteor.lon = Country.lon = 12.000000)
+    AND
+    (Meteor.year = Events.year)
