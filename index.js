@@ -3,4 +3,4 @@ const app = express()
 app.get('/', (req, res) => {
   res.send('HEY!')
 })
-app.listen(3000, () => console.log('Server running on ' + app.adress().port))
+app.listen(3000, () => console.log('Server running on 3000'))
