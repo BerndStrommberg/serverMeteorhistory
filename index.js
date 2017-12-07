@@ -27,7 +27,7 @@ function getQueryInRadius(lat, lon) {
 function getContent(lat, lon) {
     console.log("from lat: " + lat, "lon: ", lon);
     let eventQuery =
-        "select * from Country, events, Meteor" +
+        "select country, name, year from Country, events, Meteor" +
         "where events.eventLat BETWEEN (" +
         (lat - radius) +
         " and " +
