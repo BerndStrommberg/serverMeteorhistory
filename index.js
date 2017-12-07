@@ -122,13 +122,16 @@ app.get("/", (request, response) => {
     console.log(query.task + " Type: " + typeof query.task);
     response.setHeader("Content-Type", "application/json");
     if (query.task === tasks.getEvents.name) {
-        connection.query(getContent(-1.002, 37.15), (err, rows, fields) => {
-            if (err) {
-                console.log("Error: ", err);
-            } else {
-                response.send(JSON.stringify(rows));
+        connection.query(
+            getContent(parseFloat(query.lat), parseFloat(query.lon)),
+            (err, rows, fields) => {
+                if (err) {
+                    console.log("Error: ", err);
+                } else {
+                    response.send(JSON.stringify(rows));
+                }
             }
-        });
+        );
     }
 });
 app.listen(3000);
