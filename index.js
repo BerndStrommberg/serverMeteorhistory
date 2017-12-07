@@ -16,7 +16,7 @@ const radius = 0.8;
 function getQueryInRadius(lat, lon) {
     console.log("Lat: " + lat + ": " + typeof lat);
     let radiusQuery =
-        "SELECT description FROM events, Country WHERE lat.events = lat.Country = " +
+        "SELECT eventDescription FROM events, Country WHERE lat.events = lat.Country = " +
         lat +
         " AND lon.events = lon.Country = " +
         lon +
