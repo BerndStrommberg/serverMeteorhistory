@@ -62,7 +62,7 @@ app.get("/", (request, response) => {
     console.log(query.task + " Type: " + typeof query.task);
     response.setHeader("Content-Type", "application/json");
     if (query.task === tasks.getEvents.name) {
-        connection.query(getQueryInRadius(query.lat,query.lon), (err, rows, fields) => {
+        connection.query(getQueryInRadius(query.lat, query.lon), (err, rows, fields) => {
             if (err) {
                 console.log("Error: ", err);
             } else {
@@ -91,19 +91,3 @@ app.get("/", (request, response) => {
     // }
 });
 app.listen(3000);
-
-
-
-
-SELECT
-    *
-FROM
-    Events,
-    Meteor,
-    Country
-WHERE
-    (Events.lat = Meteor.lat = Country.lat = 42.000000)
-    AND
-    (Events.lon = Meteor.lon = Country.lon = 12.000000)
-    AND
-    (Meteor.year = Events.year)
