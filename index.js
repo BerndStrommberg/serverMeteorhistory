@@ -16,15 +16,11 @@ const radius = 0.8;
 function getQueryInRadius(lat, lon) {
     console.log("Lat: " + lat + ": " + typeof lat);
     let radiusQuery =
-        "SELECT * FROM test WHERE (lat BETWEEN " +
-        (lat - radius) +
-        " AND " +
-        (lat + radius) +
-        ") AND (lon BETWEEN " +
-        (lon - radius) +
-        " AND " +
-        (lon + radius) +
-        ")";
+        "SELECT description FROM events, Country WHERE lat.events = lat.Country = " +
+        lat +
+        " AND lon.events = lon.Country = " +
+        lon +
+        ";"
     return radiusQuery;
 }
 
@@ -66,7 +62,7 @@ app.get("/", (request, response) => {
     console.log(query.task + " Type: " + typeof query.task);
     response.setHeader("Content-Type", "application/json");
     if (query.task === tasks.getEvents.name) {
-        connection.query("SELECT * FROM events;", (err, rows, fields) => {
+        connection.query(getQueryInRadius(query.lat,query.lon), (err, rows, fields) => {
             if (err) {
                 console.log("Error: ", err);
             } else {
