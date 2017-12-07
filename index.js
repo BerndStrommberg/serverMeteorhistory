@@ -11,7 +11,7 @@ const connection = mysql.createConnection({
 });
 
 const app = express();
-const radius = radius;
+const radius = 0.8;
 
 function getQueryInRadius(lat, lon) {
     console.log("Lat: " + lat + ": " + typeof lat);
@@ -26,38 +26,6 @@ function getQueryInRadius(lat, lon) {
 
 function getContent(lat, lon) {
     console.log("from lat: " + lat, "lon: ", lon);
-    let eventQuery =
-        "select country, name, year from Country, events, Meteor" +
-        "where events.eventLat BETWEEN (" +
-        (lat - radius) +
-        " and " +
-        (lat + radius) +
-        ")" +
-        "and     events.eventLon BETWEEN (" +
-        (lon - radius) +
-        " and " +
-        (lon + radius) +
-        ")" +
-        "and     Country.lat BETWEEN (" +
-        (lat - radius) +
-        " and " +
-        (lat + radius) +
-        ")" +
-        "and     Country.lon BETWEEN (" +
-        (lon - radius) +
-        " and " +
-        (lon + radius) +
-        ")" +
-        "and     Meteor.lat BETWEEN (" +
-        (lat - radius) +
-        " and " +
-        (lat + radius) +
-        ")" +
-        "and     Meteor.lon BETWEEN (" +
-        (lon - radius) +
-        " and " +
-        (lon + radius) +
-        ")";
 
     let test =
         "select * from Country, events, Meteor where events.eventLat BETWEEN (" +
