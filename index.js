@@ -3,12 +3,14 @@ const mysql = require("mysql");
 const express = require("express");
 const url = require("url");
 
-// const connection = mysql.createConnection({
-//     host: "localhost",
-//     user: "root",
-//     password: "LostInSpace",
-//     database: "meteor"
-// });
+const connection = mysql.createConnection({
+    host: "meteoritesall.cc2hnkf7p8p9.eu-central-1.rds.amazonaws.com",
+    user: "root",
+    password: "meteor420!",
+    database: "meteorAll",
+
+});
+
 
 const app = express();
 const radius = 0.8;
@@ -34,19 +36,31 @@ const radius = 0.8;
 //     }
 // };
 
-// connection.connect(err => {
-//     if (err) {
-//         console.log("Error: " + err);
-//     }
-// });
+connection.connect(err => {
+    if (err) {
+        console.log("Error: " + err);
+    }
+});
 
 app.get("/", (request, response) => {
     let urlSended = url.parse(request.url, true);
     let query = urlSended.query;
     console.log(query);
     console.log(query.task + " Type: " + (typeof query.task));
-    response.setHeader("Content-Type", "text/html");
-    response.send("<h1> Hello " + query.task + " how Are You?</h1>");
+    response.setHeader("Content-Type", "application/json");
+    connection.query(
+        "SELECT * FROM events;",
+        (err, rows, fields) => {
+            if (err) {
+                console.log("Error: ", err);
+            } else {
+                console.log("excecuting query");
+                response.sendJSON.stringify(rows);
+            }
+        }
+
+    );
+
     // if (query.task === tasks.newMeteorites.name) {
     //     console.log('SERVER: Message - excecuting task: "', query.task, '"');
     //
@@ -64,4 +78,4 @@ app.get("/", (request, response) => {
     //     );
     // }
 });
-app.listen(80);
+app.listen(3000);
