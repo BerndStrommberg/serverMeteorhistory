@@ -11,83 +11,54 @@ const connection = mysql.createConnection({
 });
 
 const app = express();
-const radius = 0.8;
+const port = 3000;
+const radius = 0.7;
 
-function getQueryInRadius(lat, lon) {
-    console.log("Lat: " + lat + ": " + typeof lat);
-    let radiusQuery =
-        "SELECT eventDescription FROM events, Country WHERE events.eventLat = Country.lat = " +
-        lat +
-        " AND events.eventLon = Country.lon = " +
-        lon +
-        ";";
-    return radiusQuery;
-}
+const tasks = {
+    getContent: {
+        name: "getContent"
+    }
+};
 
 function getContent(lat, lon) {
-    console.log("from lat: " + lat, "lon: ", lon);
-
-    let test =
-        "select * from Country, events, Meteor where events.eventLat BETWEEN (" +
-        (lat - radius) +
-        ") and ( " +
-        (lat + radius) +
-        ") and events.eventLon BETWEEN (" +
-        (lon - radius) +
-        ") and (" +
-        (lon + radius) +
-        ") and Country.lat BETWEEN (" +
+    let query =
+        "SELECT * FROM Meteor m LEFT JOIN events e on (m.lat = e.eventLat and m.lon = e.eventLon) left join Country c on (m.lat=c.countryLat and m.lon=c.countryLon) where m.lat between (" +
         (lat - radius) +
         ") and (" +
         (lat + radius) +
-        ") and Country.lon BETWEEN (" +
-        (lon - radius) +
-        ") and (" +
-        (lon + radius) +
-        ") and Meteor.lat BETWEEN (" +
-        (lat - radius) +
-        ") and (" +
-        (lat + radius) +
-        ") and Meteor.lon BETWEEN (" +
+        ") and m.lon between (" +
         (lon - radius) +
         ") and (" +
         (lon + radius) +
         ")";
-    return test;
-}
 
-const tasks = {
-    getMeteorites: {
-        name: "getMeteorites"
-    },
-    getEvents: {
-        name: "getEvents"
-    }
-};
+    return query;
+}
 
 connection.connect(err => {
     if (err) {
         console.log("Error: " + err);
+    } else {
+        console.log("server is running... listen in port: ", port);
     }
 });
 
 app.get("/", (request, response) => {
     let urlSended = url.parse(request.url, true);
     let query = urlSended.query;
-    console.log(query);
-    console.log(query.task + " Type: " + typeof query.task);
     response.setHeader("Content-Type", "application/json");
-    if (query.task === tasks.getEvents.name) {
+    if (query.task === tasks.getContent.name) {
         connection.query(
             getContent(parseFloat(query.lat), parseFloat(query.lon)),
             (err, rows, fields) => {
                 if (err) {
                     console.log("Error: ", err);
                 } else {
+                    console.log("Hallo Meteoriten + Country: ", rows);
                     response.send(JSON.stringify(rows));
                 }
             }
         );
     }
 });
-app.listen(3000);
+app.listen(port);
