@@ -1,3 +1,4 @@
+//http://ec2-18-195-17-121.eu-central-1.compute.amazonaws.com:3000/?task=getContent&lat=-1.002&lon=37.150
 const http = require("http");
 const mysql = require("mysql");
 const express = require("express");
@@ -54,8 +55,9 @@ app.get("/", (request, response) => {
                 if (err) {
                     console.log("Error: ", err);
                 } else {
-                    console.log("Hallo Meteoriten + Country: ", rows);
+                    console.log("Hallo Meteoriten");
                     response.send(JSON.stringify(rows));
+
                 }
             }
         );
