@@ -19,7 +19,7 @@ const tasks = {
     getContent: {
         name: "getContent"
     },
-    createEvent : {
+    createEvent: {
         name: "createEvent"
     }
 };
@@ -39,28 +39,36 @@ function getContent(lat, lon) {
     return query;
 }
 
-
-function createEvent(eventLat, eventLon, eventYear, eventCountryName, eventDescription, eventLike, eventDisLike, eventNickName) {
+function createEvent(
+    eventLat,
+    eventLon,
+    eventYear,
+    eventCountryName,
+    eventDescription,
+    eventLike,
+    eventDisLike,
+    eventNickName
+) {
     let query =
-    "INSERT INTO Event (eventLat, eventLon, eventYear, eventCountryName, eventDescription, eventLike, eventDisLike, eventNickName) " +
-    "VALUES " +
-    "(" +
-    eventLat +
-    "," +
-    eventLon +
-    "," +
-    eventYear +
-    "," +
-    eventCountryName +
-    "," +
-    eventDescription +
-    "," +
-    eventLike +
-    "," +
-    eventDisLike +
-    "," +
-    eventNickName +
-    ")";
+        "INSERT INTO Event (eventLat, eventLon, eventYear, eventCountryName, eventDescription, eventLike, eventDisLike, eventNickName) " +
+        "VALUES " +
+        "(" +
+        eventLat +
+        "," +
+        eventLon +
+        "," +
+        eventYear +
+        "," +
+        eventCountryName +
+        "," +
+        eventDescription +
+        "," +
+        eventLike +
+        "," +
+        eventDisLike +
+        "," +
+        eventNickName +
+        ")";
 
     return query;
 }
@@ -91,8 +99,18 @@ app.get("/", (request, response) => {
         );
     } else if (query.task === tasks.createEvent.name) {
         connection.query(
-            createEvent(parseFloat(query.eventLat), parseFloat(query.eventLon), query.eventYear, query.eventCountryName, query.eventDescription, parseInt(query.eventLike), parseInt(query.eventDisLike), query.eventNickName), (err, rows, fields) => {
-                if(err) {
+            createEvent(
+                parseFloat(query.eventLat),
+                parseFloat(query.eventLon),
+                query.eventYear,
+                query.eventCountryName,
+                query.eventDescription,
+                parseInt(query.eventLike),
+                parseInt(query.eventDisLike),
+                query.eventNickName
+            ),
+            (err, rows, fields) => {
+                if (err) {
                     console.log("Error: ", err);
                 } else {
                     response.send(query.eventNickName + ", Is deiner!");
