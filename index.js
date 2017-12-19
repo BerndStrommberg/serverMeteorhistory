@@ -49,8 +49,7 @@ function createEvent(
     eventYear,
     eventCountryName,
     eventDescription,
-    eventLike,
-    eventDislike,
+    team,
     eventNickName
 ) {
     let query =
