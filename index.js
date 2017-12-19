@@ -63,15 +63,21 @@ function createEvent(
         "," +
         eventYear +
         "," +
+        '"' +
         eventCountryName +
+        '"' +
         "," +
+        '"' +
         eventDescription +
+        '"' +
         "," +
         eventLike +
         "," +
         eventDislike +
         "," +
+        '"' +
         eventNickName +
+        '"' +
         ")";
     console.log(query);
 
@@ -107,12 +113,12 @@ app.get("/", (request, response) => {
             createEvent(
                 parseFloat(query.eventLat),
                 parseFloat(query.eventLon),
-                query.eventYear.toString(),
-                query.eventCountryName.toString(),
-                query.eventDescription.toString(),
+                query.eventYear,
+                query.eventCountryName,
+                query.eventDescription,
                 parseInt(query.eventLike),
                 parseInt(query.eventDislike),
-                query.eventNickName.toString()
+                query.eventNickName
             ),
             (err, rows, fields) => {
                 if (err) {
