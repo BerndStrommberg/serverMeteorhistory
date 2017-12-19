@@ -107,12 +107,12 @@ app.get("/", (request, response) => {
             createEvent(
                 parseFloat(query.eventLat),
                 parseFloat(query.eventLon),
-                query.eventYear,
-                query.eventCountryName,
-                query.eventDescription,
+                query.eventYear.toString(),
+                query.eventCountryName.toString(),
+                query.eventDescription.toString(),
                 parseInt(query.eventLike),
                 parseInt(query.eventDislike),
-                query.eventNickName
+                query.eventNickName.toString()
             ),
             (err, rows, fields) => {
                 if (err) {
