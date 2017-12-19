@@ -11,7 +11,7 @@ const connection = mysql.createConnection({
 });
 
 const app = express();
-const port = 3000;
+const port = 80;
 const radius = 0.7;
 
 const tasks = {
