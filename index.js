@@ -18,6 +18,9 @@ const radius = 0.7;
 const tasks = {
     getContent: {
         name: "getContent"
+    },
+    createEvent : {
+        name: "createEvent"
     }
 };
 
@@ -32,6 +35,32 @@ function getContent(lat, lon) {
         ") and (" +
         (lon + radius) +
         ")";
+
+    return query;
+}
+
+
+function createEvent(eventLat, eventLon, eventYear, eventCountryName, eventDescription, eventLike, eventDisLike, eventNickName) {
+    let query =
+    "INSERT INTO Event (eventLat, eventLon, eventYear, eventCountryName, eventDescription, eventLike, eventDisLike, eventNickName) " +
+    "VALUES " +
+    "(" +
+    eventLat +
+    "," +
+    eventLon +
+    "," +
+    eventYear +
+    "," +
+    eventCountryName +
+    "," +
+    eventDescription +
+    "," +
+    eventLike +
+    "," +
+    eventDisLike +
+    "," +
+    eventNickName +
+    ")";
 
     return query;
 }
@@ -58,6 +87,17 @@ app.get("/", (request, response) => {
                     console.log("Hallo Meteoriten");
                     response.send(JSON.stringify(rows));
 
+                }
+            }
+        );
+    } else if (query.task === tasks.createEvent.name) {
+        connection.query(
+            createEvent(parseFloat(query.eventLat), parseFloat(query.eventLon), query.eventYear, query.eventCountryName, query.eventDescription, parseInt(query.eventLike), parseInt(query.eventDisLike), query.eventNickName), (err, rows, fields) => {
+                if(err) {
+                    console.log("Error: ", err);
+                } else {
+                    response.send(query.eventNickName + ", Is deiner!");
+                    console.log("Hat geklappt!");
                 }
             }
         );
