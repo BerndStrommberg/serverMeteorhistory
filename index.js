@@ -45,23 +45,22 @@ connection.connect(err => {
 });
 
 app.get("/", (request, response) => {
-    // let urlSended = url.parse(request.url, true);
-    // let query = urlSended.query;
-    // response.setHeader("Content-Type", "application/json");
-    // if (query.task === tasks.getContent.name) {
-    //     connection.query(
-    //         getContent(parseFloat(query.lat), parseFloat(query.lon)),
-    //         (err, rows, fields) => {
-    //             if (err) {
-    //                 console.log("Error: ", err);
-    //             } else {
-    //                 console.log("Hallo Meteoriten + Country: ", rows);
-    //                 // response.send(JSON.stringify(rows));
-    //
-    //             }
-    //         }
-    //     );
-    // }
-    response.send("Hat funktioniert guck ins Terminal");
+    let urlSended = url.parse(request.url, true);
+    let query = urlSended.query;
+    response.setHeader("Content-Type", "application/json");
+    if (query.task === tasks.getContent.name) {
+        connection.query(
+            getContent(parseFloat(query.lat), parseFloat(query.lon)),
+            (err, rows, fields) => {
+                if (err) {
+                    console.log("Error: ", err);
+                } else {
+                    console.log("Hallo Meteoriten");
+                    response.send(JSON.stringify(rows));
+
+                }
+            }
+        );
+    }
 });
 app.listen(port);
