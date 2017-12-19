@@ -2,7 +2,7 @@
 //http: //ec2-18-195-17-121.eu-central-1.compute.amazonaws.com:8080/?task=createEvent&eventLat=.1002&eventLon=37.15&eventYear=01/01/1994 12:00:00 AM&eventCountryName=Heidepark Soltau&eventDescription=Test&eventLike=0&eventDislike=0&eventNickName=Moritz
 // http://ec2-18-195-17-121.eu-central-1.compute.amazonaws.com:8080/?task=createEvent&eventLat=-1.002&eventLon=37.15&eventYear=01/01/1994 12:00:00 20AM&eventCountryName=Heidepark 20Soltau&eventDescription=Test&eventLike=0&eventDislike=0&eventNickName=Moritz
 
-//http://ec2-18-195-17-121.eu-central-1.compute.amazonaws.com:8080/?task=createEvent&eventLat=-1.002&eventLon=37.15&eventYear=2017&eventCountryName=HeideparkSoltau&eventDescription=Test&eventLike=0&eventDislike=0&eventNickName=Moritz
+// http://ec2-18-195-17-121.eu-central-1.compute.amazonaws.com:8080/?task=createEvent&eventLat=-1.002&eventLon=37.15&eventYear=2017&eventCountryName=HeideparkSoltau&eventDescription=Test&eventLike=0&eventDislike=0&eventNickName=Moritz
 const http = require("http");
 const mysql = require("mysql");
 const express = require("express");
@@ -54,34 +54,23 @@ function createEvent(
     eventNickName
 ) {
     let query =
-        "INSERT INTO Event (eventLat, eventLon, eventYear, eventCountryName, eventDescription, eventLike, eventDislike, eventNickName) " +
+        "INSERT INTO Event (eventLat, eventLon, eventYear, eventCountryName, eventDescription, eventNickName, team) " +
         "VALUES " +
         "(" +
         eventLat +
         "," +
         eventLon +
         "," +
-        '"' +
         eventYear +
-        '"' +
         "," +
-        '"' +
         eventCountryName +
-        '"' +
         "," +
-        '"' +
         eventDescription +
-        '"' +
         "," +
-        eventLike +
+        team +
         "," +
-        eventDislike +
-        "," +
-        '"' +
         eventNickName +
-        '"' +
         ")";
-    console.log(query);
 
     return query;
 }
@@ -118,9 +107,8 @@ app.get("/", (request, response) => {
                 query.eventYear,
                 query.eventCountryName,
                 query.eventDescription,
-                parseInt(query.eventLike),
-                parseInt(query.eventDislike),
-                query.eventNickName
+                query.eventNickName,
+                parseInt(query.team)
             ),
             (err, rows, fields) => {
                 if (err) {
