@@ -55,13 +55,21 @@ function createEvent(
         "," +
         eventLon +
         "," +
+        '"' +
         eventYear +
+        '"' +
         "," +
+        '"' +
         eventCountryName +
+        '"' +
         "," +
+        '"' +
         eventDescription +
+        '"' +
         "," +
+        '"' +
         eventNickName +
+        '"' +
         "," +
         team +
         ")";
