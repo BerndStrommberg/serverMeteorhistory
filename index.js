@@ -67,9 +67,9 @@ function createEvent(
         "," +
         eventDescription +
         "," +
-        team +
-        "," +
         eventNickName +
+        "," +
+        team +
         ")";
 
     return query;
