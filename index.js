@@ -73,6 +73,7 @@ function createEvent(
         "," +
         eventNickName +
         ")";
+        console.log(query);
 
     return query;
 }
