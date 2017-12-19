@@ -48,11 +48,19 @@ function createEvent(
     eventCountryName,
     eventDescription,
     eventLike,
+<<<<<<< HEAD
     eventDislike,
     eventNickName
 ) {
     let query =
         "INSERT INTO Event (eventLat, eventLon, eventYear, eventCountryName, eventDescription, eventLike, eventDislike, eventNickName) " +
+=======
+    eventDisLike,
+    eventNickName
+) {
+    let query =
+        "INSERT INTO Event (eventLat, eventLon, eventYear, eventCountryName, eventDescription, eventLike, eventDisLike, eventNickName) " +
+>>>>>>> 40d0208cf8fe97fca12c72c9bea6447c4ee3e7c7
         "VALUES " +
         "(" +
         eventLat +
@@ -67,7 +75,11 @@ function createEvent(
         "," +
         eventLike +
         "," +
+<<<<<<< HEAD
         eventDislike +
+=======
+        eventDisLike +
+>>>>>>> 40d0208cf8fe97fca12c72c9bea6447c4ee3e7c7
         "," +
         eventNickName +
         ")";
@@ -108,7 +120,11 @@ app.get("/", (request, response) => {
                 query.eventCountryName,
                 query.eventDescription,
                 parseInt(query.eventLike),
+<<<<<<< HEAD
                 parseInt(query.eventDislike),
+=======
+                parseInt(query.eventDisLike),
+>>>>>>> 40d0208cf8fe97fca12c72c9bea6447c4ee3e7c7
                 query.eventNickName
             ),
             (err, rows, fields) => {
