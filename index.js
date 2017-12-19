@@ -56,10 +56,9 @@ app.get("/", (request, response) => {
                     console.log("Error: ", err);
                 } else {
                     console.log("Hallo Meteoriten + Country: ", rows);
-                    response.send(JSON.stringify(rows));
-                    if (err) {
-                        console.log(err);
-                    }
+                    response.send("Hat funktioniert guck ins Terminal");
+                    // response.send(JSON.stringify(rows));
+
                 }
             }
         );
