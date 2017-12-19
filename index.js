@@ -1,8 +1,5 @@
 //http://ec2-18-195-17-121.eu-central-1.compute.amazonaws.com:3000/?task=getContent&lat=-1.002&lon=37.150
-//http: //ec2-18-195-17-121.eu-central-1.compute.amazonaws.com:8080/?task=createEvent&eventLat=.1002&eventLon=37.15&eventYear=01/01/1994 12:00:00 AM&eventCountryName=Heidepark Soltau&eventDescription=Test&eventLike=0&eventDislike=0&eventNickName=Moritz
-// http://ec2-18-195-17-121.eu-central-1.compute.amazonaws.com:8080/?task=createEvent&eventLat=-1.002&eventLon=37.15&eventYear=01/01/1994 12:00:00 20AM&eventCountryName=Heidepark 20Soltau&eventDescription=Test&eventLike=0&eventDislike=0&eventNickName=Moritz
-
-//http://ec2-18-195-17-121.eu-central-1.compute.amazonaws.com:8080/?task=createEvent&eventLat=-1.002&eventLon=37.15&eventYear=2017&eventCountryName=HeideparkSoltau&eventDescription=Test&eventLike=0&eventDislike=0&eventNickName=Moritz
+// http://ec2-18-195-17-121.eu-central-1.compute.amazonaws.com:8080/?task=createEvent&eventLat=50.775&eventLon=6.083&eventYear=01/01/1994%2012:00:00%20AM&eventCountryName=Heidepark%2020Soltau&eventDescription=Test&eventLike=0&eventDislike=0&eventNickName=Moritz
 const http = require("http");
 const mysql = require("mysql");
 const express = require("express");
