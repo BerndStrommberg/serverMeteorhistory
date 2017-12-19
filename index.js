@@ -49,8 +49,8 @@ function createEvent(
     eventYear,
     eventCountryName,
     eventDescription,
-    team,
-    eventNickName
+    eventNickName,
+    team
 ) {
     let query =
         "INSERT INTO Event (eventLat, eventLon, eventYear, eventCountryName, eventDescription, eventNickName, team) " +
