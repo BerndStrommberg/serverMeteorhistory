@@ -61,7 +61,9 @@ function createEvent(
         "," +
         eventLon +
         "," +
+        '"' +
         eventYear +
+        '"' +
         "," +
         '"' +
         eventCountryName +
