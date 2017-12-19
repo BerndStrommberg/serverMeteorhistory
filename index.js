@@ -26,7 +26,7 @@ const tasks = {
 
 function getContent(lat, lon) {
     let query =
-        "SELECT * FROM Meteor m LEFT JOIN events e on (m.lat = e.eventLat and m.lon = e.eventLon) left join Country c on (m.lat=c.countryLat and m.lon=c.countryLon) where m.lat between (" +
+        "SELECT * FROM Meteor m LEFT JOIN Event e on (m.lat = e.eventLat and m.lon = e.eventLon) left join Country c on (m.lat=c.countryLat and m.lon=c.countryLon) where m.lat between (" +
         (lat - radius) +
         ") and (" +
         (lat + radius) +
@@ -86,7 +86,6 @@ app.get("/", (request, response) => {
                 } else {
                     console.log("Hallo Meteoriten");
                     response.send(JSON.stringify(rows));
-
                 }
             }
         );
